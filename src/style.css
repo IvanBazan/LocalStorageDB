@@ -1,0 +1,141 @@
+    #addUser {
+        max-width: 28rem;
+        display: flex;
+        flex-direction: column
+    }
+    
+    #addUser input,
+    button {
+        margin: 3px 0;
+    }
+    
+    .disclaimer {
+        font-size: 0.7rem;
+    }
+    
+    #addUser label {
+        margin: 6px;
+    }
+    
+    #filters {
+        display: flex;
+        align-content: flex-start;
+    }
+    
+    #filters div {
+        flex-grow: 1;
+        flex-basis: 15rem;
+    }
+    
+    select {
+        display: block;
+        width: 100%;
+        height: calc(1.5em + .75rem + 2px);
+        padding: .375rem .25rem;
+        font-size: 1rem;
+        font-weight: 400;
+        line-height: 1.5;
+        color: #495057;
+        background-color: #fff;
+        background-clip: padding-box;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+        transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    }
+    
+    #grid-template {
+        overflow-y: scroll;
+        max-height: 80vh;
+    }
+    
+    tr:nth-of-type(even) {
+        background: #fff;
+    }
+    
+    tr:nth-of-type(odd) {
+        background: rgb(221, 221, 221);
+    }
+    
+    th {
+        background: rgb(202, 202, 202);
+        position: sticky;
+        top: 0;
+    }
+    
+    #grid-template td,
+    #grid-template th {
+        padding: 0.25rem;
+    }
+    
+    *,
+     ::after,
+     ::before {
+        box-sizing: content-box;
+    }
+    
+    @media only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px) {
+        table,
+        thead,
+        tbody,
+        th,
+        td,
+        tr {
+            display: block;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+        tr {
+            border: 1px solid #ccc;
+            text-align: end;
+        }
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+        }
+        td:before {
+            position: absolute;
+            left: 6px;
+            padding-right: 10px;
+            white-space: nowrap;
+            font-weight: bold;
+        }
+        td:nth-of-type(1):before {
+            content: "E-mail";
+        }
+        td:nth-of-type(2):before {
+            content: "Password";
+        }
+        td:nth-of-type(3):before {
+            content: "Phone";
+        }
+        td:nth-of-type(4):before {
+            content: "Name";
+        }
+        td:nth-of-type(5):before {
+            content: "Status";
+        }
+        td:nth-of-type(6):before {
+            content: "Created";
+        }
+        td:nth-of-type(7):before {
+            content: "Last change";
+        }
+        #grid-template td,
+        #grid-template th {
+            padding: 0.35rem 0.35rem 0.35rem 30%;
+        }
+        #grid-template #editDeleteButtons {
+            padding: 0
+        }
+        *,
+         ::after,
+         ::before {
+            box-sizing: border-box;
+        }
+    }

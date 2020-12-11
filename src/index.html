@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <title>TEST APP</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container pt-3" id="app" v-cloak>
+        <h1>TEST APP</h1>
+        <hr>
+        <div v-if="loading">
+            <loader />
+        </div>
+        <div v-else-if="users.length">
+            <div class="jumbotron" style="padding: 2rem 2rem">
+                <form id="filters" class="row">
+                    <div class="col">
+                        <h4>Фильтры</h4>
+                    </div>
+                    <div class="col">
+                        <input v-model="search.email" class="form-control" placeholder="E-mail">
+                    </div>
+                    <div class="col">
+                        <input v-model="search.phone" class="form-control" placeholder="Номер телефона">
+                    </div>
+                    <div class="col">
+
+                        <select class="form-select" aria-label="Статус пользователя" v-model="search.status">
+                                <option selected value="">Cтатус</option>
+                                <option value="Client">Client</option>
+                                <option value="Partner">Partner</option>
+                                <option value="Admin">Admin</option>
+                              </select>
+
+                    </div>
+                </form>
+                <hr>
+                <div class="table" id="grid-template">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th v-for="key in columnNames">
+                                    {{ key }}
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr v-for="entry in users_f">
+                                <td v-for="key in columnNames">
+                                    {{entry[key]}}
+                                </td>
+                                <td id='editDeleteButtons'>
+                                    <button class="btn btn-danger" id="delete" v-on:click="deleteUser(entry.id)">Удалить</button>
+                                    <button class="btn btn-info" id="edit" v-on:click="editUser(entry.id)">Редактировать</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <hr>
+                <p>Total {{users.length}} items</p>
+                <div id="addUser">
+                    <h3>{{addUserLogo}} запись</h3>
+                    <input v-model="newUser.email" class="form-control" placeholder="e-mail">
+                    <div class="disclaimer">{{liveValidation.email}}</input>
+                        <input v-model="newUser.password" class="form-control" placeholder="пароль">
+                        <div class="disclaimer">{{liveValidation.password}}
+                        </div>
+                        </input>
+                        <input v-model="newUser.phone" class="form-control" placeholder="телефон">
+                        <div class="disclaimer">{{liveValidation.phone}}</div>
+                        </input>
+                        <input v-model="newUser.name" class="form-control" placeholder="ФИО">
+                        <div class="disclaimer">{{liveValidation.name}}</div>
+                        </input>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="Client" v-model="newUser.status" checked>
+                            <label class="form-check-label" for="inlineRadio1">Client</label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="Partner" v-model="newUser.status">
+                            <label class="form-check-label" for="inlineRadio2">Partner</label>
+                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="Admin" v-model="newUser.status">
+                            <label class="form-check-label" for="inlineRadio3">Admin</label>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary" v-on:click="submitUser" :disabled="!newUserValid">{{addUserLogo}}</button>
+                        <button type="submit" class="btn btn-warning" v-on:click="clear">Отмена</button>
+                    </div>
+                </div>
+            </div>
+            <script type="module" src="script.js"></script>
+</body>
+
+</html>
